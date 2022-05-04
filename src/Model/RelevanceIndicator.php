@@ -2,7 +2,7 @@
 
 namespace Ebay\Commerce\Taxonomy\Model;
 
-use OpenAPI\Runtime\AbstractModel as AbstractModel;
+use OpenAPI\Runtime\AbstractModel;
 
 /**
  * The relevance of this aspect. This field is returned if eBay has data on how

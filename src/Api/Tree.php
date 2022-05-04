@@ -2,17 +2,16 @@
 
 namespace Ebay\Commerce\Taxonomy\Api;
 
-use Ebay\Commerce\Taxonomy\Model\AspectMetadata as AspectMetadata;
-use Ebay\Commerce\Taxonomy\Model\BaseCategoryTree as BaseCategoryTree;
-use Ebay\Commerce\Taxonomy\Model\CategorySubtree as CategorySubtree;
-use Ebay\Commerce\Taxonomy\Model\CategorySuggestionResponse as CategorySuggestionResponse;
-use Ebay\Commerce\Taxonomy\Model\CategoryTree as CategoryTreeModel;
-use Ebay\Commerce\Taxonomy\Model\GetCategoriesAspectResponse as GetCategoriesAspectResponse;
-use Ebay\Commerce\Taxonomy\Model\GetCompatibilityMetadataResponse as GetCompatibilityMetadataResponse;
-use Ebay\Commerce\Taxonomy\Model\GetCompatibilityPropertyValuesResponse as GetCompatibilityPropertyValuesResponse;
-use OpenAPI\Runtime\AbstractAPI as AbstractAPI;
+use Ebay\Commerce\Taxonomy\Model\AspectMetadata;
+use Ebay\Commerce\Taxonomy\Model\BaseCategoryTree;
+use Ebay\Commerce\Taxonomy\Model\CategorySubtree;
+use Ebay\Commerce\Taxonomy\Model\CategorySuggestionResponse;
+use Ebay\Commerce\Taxonomy\Model\CategoryTree;
+use Ebay\Commerce\Taxonomy\Model\GetCategoriesAspectResponse;
+use Ebay\Commerce\Taxonomy\Model\GetCompatibilityMetadataResponse;
+use Ebay\Commerce\Taxonomy\Model\GetCompatibilityPropertyValuesResponse;
 
-class CategoryTree extends AbstractAPI
+class Tree extends AbstractAPI
 {
     /**
      * This call returns a complete list of aspects for all of the leaf categories that
@@ -35,9 +34,13 @@ class CategoryTree extends AbstractAPI
      */
     public function fetchItemAspects(string $category_tree_id): GetCategoriesAspectResponse
     {
-        return $this->client->request('fetchItemAspects', 'GET', "category_tree/{$category_tree_id}/fetch_item_aspects",
-            [
-            ]
+        return $this->request(
+        'fetchItemAspects',
+        'GET',
+        "category_tree/$category_tree_id/fetch_item_aspects",
+        null,
+        [],
+        []
         );
     }
 
@@ -54,15 +57,28 @@ class CategoryTree extends AbstractAPI
      *                       tree ID is being requested. For a list of supported marketplace IDs, see <a
      *                       href="/api-docs/commerce/taxonomy/static/supportedmarketplaces.html">Marketplaces
      *                       with Default Category Trees</a>.
+     * @param array $headers options:
+     *                       'Accept-Language'	string	A header used to indicate the natural language the
+     *                       seller prefers for the response.<br /><br />This specifies the language that the
+     *                       seller wants to use when the field values provided in the request body are
+     *                       displayed to consumers.<br /><br /><span class="tablenote">
+     *                       <strong>Note:</strong> For details, see <i>Accept-Language</i> in <a
+     *                       href="/api-docs/static/rest-request-components.html#headers">HTTP request
+     *                       headers</a>.</span><br /><br /><b>Valid Values:</b> <ul><li>For EBAY_CA in
+     *                       French:<br /><code>Accept-Language: fr-CA</code></li><li>For EBAY_BE in
+     *                       French:<br /><code>Accept-Language: fr-BE</code></li></ul>
      *
      * @return BaseCategoryTree
      */
-    public function getDefaultId(array $queries = []): BaseCategoryTree
+    public function getDefaultId(array $queries = [], array $headers = []): BaseCategoryTree
     {
-        return $this->client->request('getDefaultCategoryTreeId', 'GET', 'get_default_category_tree_id',
-            [
-                'query' => $queries,
-            ]
+        return $this->request(
+        'getDefaultCategoryTreeId',
+        'GET',
+        'get_default_category_tree_id',
+        null,
+        $queries,
+        $headers
         );
     }
 
@@ -84,13 +100,17 @@ class CategoryTree extends AbstractAPI
      * @param string $category_tree_id the unique identifier of the eBay category tree
      *                                 being requested
      *
-     * @return CategoryTreeModel
+     * @return CategoryTree
      */
-    public function get(string $category_tree_id): CategoryTreeModel
+    public function get(string $category_tree_id): CategoryTree
     {
-        return $this->client->request('getCategoryTree', 'GET', "category_tree/{$category_tree_id}",
-            [
-            ]
+        return $this->request(
+        'getCategoryTree',
+        'GET',
+        "category_tree/$category_tree_id",
+        null,
+        [],
+        []
         );
     }
 
@@ -129,10 +149,13 @@ class CategoryTree extends AbstractAPI
      */
     public function getCategorySubtree(string $category_tree_id, array $queries = []): CategorySubtree
     {
-        return $this->client->request('getCategorySubtree', 'GET', "category_tree/{$category_tree_id}/get_category_subtree",
-            [
-                'query' => $queries,
-            ]
+        return $this->request(
+        'getCategorySubtree',
+        'GET',
+        "category_tree/$category_tree_id/get_category_subtree",
+        null,
+        $queries,
+        []
         );
     }
 
@@ -169,10 +192,13 @@ class CategoryTree extends AbstractAPI
      */
     public function getCategorySuggestions(string $category_tree_id, array $queries = []): CategorySuggestionResponse
     {
-        return $this->client->request('getCategorySuggestions', 'GET', "category_tree/{$category_tree_id}/get_category_suggestions",
-            [
-                'query' => $queries,
-            ]
+        return $this->request(
+        'getCategorySuggestions',
+        'GET',
+        "category_tree/$category_tree_id/get_category_suggestions",
+        null,
+        $queries,
+        []
         );
     }
 
@@ -203,10 +229,13 @@ class CategoryTree extends AbstractAPI
      */
     public function getItemAspectsForCategory(string $category_tree_id, array $queries = []): AspectMetadata
     {
-        return $this->client->request('getItemAspectsForCategory', 'GET', "category_tree/{$category_tree_id}/get_item_aspects_for_category",
-            [
-                'query' => $queries,
-            ]
+        return $this->request(
+        'getItemAspectsForCategory',
+        'GET',
+        "category_tree/$category_tree_id/get_item_aspects_for_category",
+        null,
+        $queries,
+        []
         );
     }
 
@@ -252,10 +281,13 @@ class CategoryTree extends AbstractAPI
      */
     public function getCompatibilityProperties(string $category_tree_id, array $queries = []): GetCompatibilityMetadataResponse
     {
-        return $this->client->request('getCompatibilityProperties', 'GET', "category_tree/{$category_tree_id}/get_compatibility_properties",
-            [
-                'query' => $queries,
-            ]
+        return $this->request(
+        'getCompatibilityProperties',
+        'GET',
+        "category_tree/$category_tree_id/get_compatibility_properties",
+        null,
+        $queries,
+        []
         );
     }
 
@@ -325,10 +357,13 @@ class CategoryTree extends AbstractAPI
      */
     public function getCompatibilityPropertyValues(string $category_tree_id, array $queries = []): GetCompatibilityPropertyValuesResponse
     {
-        return $this->client->request('getCompatibilityPropertyValues', 'GET', "category_tree/{$category_tree_id}/get_compatibility_property_values",
-            [
-                'query' => $queries,
-            ]
+        return $this->request(
+        'getCompatibilityPropertyValues',
+        'GET',
+        "category_tree/$category_tree_id/get_compatibility_property_values",
+        null,
+        $queries,
+        []
         );
     }
 }

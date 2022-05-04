@@ -2,7 +2,7 @@
 
 namespace Ebay\Commerce\Taxonomy\Model;
 
-use OpenAPI\Runtime\AbstractModel as AbstractModel;
+use OpenAPI\Runtime\AbstractModel;
 
 /**
  * This type is used by the base response of the

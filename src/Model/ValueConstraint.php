@@ -2,7 +2,7 @@
 
 namespace Ebay\Commerce\Taxonomy\Model;
 
-use OpenAPI\Runtime\AbstractModel as AbstractModel;
+use OpenAPI\Runtime\AbstractModel;
 
 /**
  * This type contains a list of the dependencies that identify when a particular

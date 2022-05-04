@@ -2,7 +2,7 @@
 
 namespace Ebay\Commerce\Taxonomy\Model;
 
-use OpenAPI\Runtime\AbstractModel as AbstractModel;
+use OpenAPI\Runtime\AbstractModel;
 
 class CategoryAspect extends AbstractModel
 {
