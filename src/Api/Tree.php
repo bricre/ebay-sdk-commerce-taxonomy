@@ -10,6 +10,7 @@ use Ebay\Commerce\Taxonomy\Model\CategoryTree;
 use Ebay\Commerce\Taxonomy\Model\GetCategoriesAspectResponse;
 use Ebay\Commerce\Taxonomy\Model\GetCompatibilityMetadataResponse;
 use Ebay\Commerce\Taxonomy\Model\GetCompatibilityPropertyValuesResponse;
+use OpenAPI\Runtime\UnexpectedResponse;
 
 class Tree extends AbstractAPI
 {
@@ -30,9 +31,9 @@ class Tree extends AbstractAPI
      * @param string $category_tree_id the unique identifier of the eBay category tree
      *                                 being requested
      *
-     * @return GetCategoriesAspectResponse
+     * @return GetCategoriesAspectResponse|UnexpectedResponse
      */
-    public function fetchItemAspects(string $category_tree_id): GetCategoriesAspectResponse
+    public function fetchItemAspects(string $category_tree_id)
     {
         return $this->request(
         'fetchItemAspects',
@@ -68,9 +69,9 @@ class Tree extends AbstractAPI
      *                       French:<br /><code>Accept-Language: fr-CA</code></li><li>For EBAY_BE in
      *                       French:<br /><code>Accept-Language: fr-BE</code></li></ul>
      *
-     * @return BaseCategoryTree
+     * @return BaseCategoryTree|UnexpectedResponse
      */
-    public function getDefaultId(array $queries = [], array $headers = []): BaseCategoryTree
+    public function getDefaultId(array $queries = [], array $headers = [])
     {
         return $this->request(
         'getDefaultCategoryTreeId',
@@ -100,9 +101,9 @@ class Tree extends AbstractAPI
      * @param string $category_tree_id the unique identifier of the eBay category tree
      *                                 being requested
      *
-     * @return CategoryTree
+     * @return CategoryTree|UnexpectedResponse
      */
-    public function get(string $category_tree_id): CategoryTree
+    public function get(string $category_tree_id)
     {
         return $this->request(
         'getCategoryTree',
@@ -145,9 +146,9 @@ class Tree extends AbstractAPI
      *                                 the deprecated category, and use the <b>getCategoryTree</b> call to update your
      *                                 cached copy of the tree. --> </span>
      *
-     * @return CategorySubtree
+     * @return CategorySubtree|UnexpectedResponse
      */
-    public function getCategorySubtree(string $category_tree_id, array $queries = []): CategorySubtree
+    public function getCategorySubtree(string $category_tree_id, array $queries = [])
     {
         return $this->request(
         'getCategorySubtree',
@@ -188,9 +189,9 @@ class Tree extends AbstractAPI
      *                                 combination of phrases or keywords. eBay will parse the string and return
      *                                 suggested categories for the item.
      *
-     * @return CategorySuggestionResponse
+     * @return CategorySuggestionResponse|UnexpectedResponse
      */
-    public function getCategorySuggestions(string $category_tree_id, array $queries = []): CategorySuggestionResponse
+    public function getCategorySuggestions(string $category_tree_id, array $queries = [])
     {
         return $this->request(
         'getCategorySuggestions',
@@ -225,9 +226,9 @@ class Tree extends AbstractAPI
      *                                 class="tablenote"> <strong>Note:</strong> If the <b>category_id</b> submitted
      *                                 does not identify a leaf node of the tree, this call returns an error. </span>
      *
-     * @return AspectMetadata
+     * @return AspectMetadata|UnexpectedResponse
      */
-    public function getItemAspectsForCategory(string $category_tree_id, array $queries = []): AspectMetadata
+    public function getItemAspectsForCategory(string $category_tree_id, array $queries = [])
     {
         return $this->request(
         'getItemAspectsForCategory',
@@ -277,9 +278,9 @@ class Tree extends AbstractAPI
      *                                 <strong>getAutomotivePartsCompatibilityPolicies</strong> method can also be used
      *                                 to see if one or more specific eBay categories support parts compatibility.
      *
-     * @return GetCompatibilityMetadataResponse
+     * @return GetCompatibilityMetadataResponse|UnexpectedResponse
      */
-    public function getCompatibilityProperties(string $category_tree_id, array $queries = []): GetCompatibilityMetadataResponse
+    public function getCompatibilityProperties(string $category_tree_id, array $queries = [])
     {
         return $this->request(
         'getCompatibilityProperties',
@@ -353,9 +354,9 @@ class Tree extends AbstractAPI
      *                                 For implementation help, refer to eBay API documentation at
      *                                 https://developer.ebay.com/api-docs/commerce/taxonomy/types/txn:ConstraintFilter
      *
-     * @return GetCompatibilityPropertyValuesResponse
+     * @return GetCompatibilityPropertyValuesResponse|UnexpectedResponse
      */
-    public function getCompatibilityPropertyValues(string $category_tree_id, array $queries = []): GetCompatibilityPropertyValuesResponse
+    public function getCompatibilityPropertyValues(string $category_tree_id, array $queries = [])
     {
         return $this->request(
         'getCompatibilityPropertyValues',
